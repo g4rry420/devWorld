@@ -1,0 +1,28 @@
+.left-homepage{
+    height: 100vh;
+    max-width: 20%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.brand-name h1{
+    color: var(--primaryColor);
+    font-weight: 600;
+    font-size: 3.2rem;
+}
+.nav-list-container{
+    list-style-type: none;
+    font-size: 2rem;
+}
+.nav-list-container li a{
+    text-decoration: none;
+    color: white;
+}
+.nav-list-container li a:hover{
+    color: var(--primaryColor);
+    background-color:rgba(234, 119, 115, 0.2);
+    border-radius: 50px;
+}
+.nav-list-container li{
+    font-size: 2rem;
+}

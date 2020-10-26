@@ -1,0 +1,10 @@
+.login-form-input{
+    border: 0;
+    background-color: #272b34;
+    color: white !important;
+}
+.login-form-input:focus{
+    box-shadow: none;
+    background-color: #272b34;
+    border: 1px solid var(--primaryColor);
+}

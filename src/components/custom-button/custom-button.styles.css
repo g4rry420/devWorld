@@ -1,0 +1,10 @@
+.custom-button{
+    background-color: var(--primaryColor);  
+    color: var(--light);
+    transition: var(--mainTransition);
+    border: 1px solid var(--primaryColor);
+}
+.custom-button:hover {
+    background: transparent;
+    color: var(--primaryColor);
+}

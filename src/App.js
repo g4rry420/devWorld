@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{ useEffect } from 'react';
+import { Route } from "react-router-dom"
+import { connect } from "react-redux"
 
-function App() {
+import Homepage from "./pages/homepage/homepage.component"
+import Header from "./components/header/header.component"
+import Login from "./components/login/login.component"
+import SignUp from "./components/signup/signup.component"
+import { setCurrentUserAsync } from "./redux/user/user.actions"
+
+function App(props) {
+  useEffect(() => {
+    const { setCurrentUserAsync } = props;
+    setCurrentUserAsync();
+  }, [])
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container-fluid">
+          <div className="row">
+            <Header/>
+            <Route exact path="/" component={Homepage} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
+          </div>
+      </div>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUserAsync: () => dispatch(setCurrentUserAsync())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
