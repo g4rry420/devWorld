@@ -1,6 +1,6 @@
 :root{
   --primaryColor:#EA7773;
-  --mainT: all 0.3s linear;
+  --mainTransition: all 0.3s linear;
   --bgColor: #14141c;
 }
 body {

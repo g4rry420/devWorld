@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 
 import "./modal.styles.css"
 import { posts } from "../../firebase/firebase.config"
-import { dispatchWaitTime } from "../../redux/posts/posts.actions"
 
-function Modal({ modalRef, currentUser, dispatchWaitTime }) {
+function Modal({ modalRef, currentUser }) {
 
 
     const [create, setCreate] = useState({
@@ -40,7 +39,6 @@ function Modal({ modalRef, currentUser, dispatchWaitTime }) {
         })
 
         modalRef.current.classList.remove("modal-active-state");
-        dispatchWaitTime();
     }
 
     
@@ -80,8 +78,4 @@ const mapStateToProps = state => ({
     currentUser: state.user.currentUser
 })
 
-const mapDispatchToProps = dispatch => ({
-    dispatchWaitTime: () => dispatch(dispatchWaitTime())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Modal)
+export default connect(mapStateToProps)(Modal)

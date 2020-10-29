@@ -2,6 +2,7 @@
     border: 0;
     background-color: #272b34;
     color: white !important;
+    border: 1px solid transparent;
 }
 .login-form-input:focus{
     box-shadow: none;

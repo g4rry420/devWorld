@@ -9,6 +9,7 @@ import SignUp from "./components/signup/signup.component"
 import Profiles from "./pages/profiles/profiles.component"
 import Notifications from "./components/notifications/notifications.component"
 import UserProfile from "./pages/user-profile/user-profile.component"
+import PostComment from './pages/post-comment/post-comment.component';
 import { setCurrentUserAsync } from "./redux/user/user.actions"
 
 function App(props) {
@@ -27,6 +28,7 @@ function App(props) {
               <Route path="/signup" render={() => props.currentUser ? <Redirect to="/" /> : <SignUp/>} />
               <Route exact path="/profiles" component={Profiles} />
               <Route path="/profiles/:profile_id" component={UserProfile} />
+              <Route path="/post/:postId" component={PostComment} />
             </Switch> 
             <Notifications />
           </div>

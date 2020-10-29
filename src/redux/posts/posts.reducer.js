@@ -3,7 +3,7 @@ import { updateHeartBoolean } from "./posts.utils"
 const INITIAL_STATE = {
     heartBoolean: [],
     posts: null,
-    waitTime: false
+    comments: []
 }
 
 const postsReducer = (state = INITIAL_STATE, action) => {
@@ -31,11 +31,11 @@ const postsReducer = (state = INITIAL_STATE, action) => {
                             item
                 })
             }
-        case "DISPATCH_WAIT_TIME":
-            return {
+        case "UPDATE_COMMENTS":
+            return{
                 ...state,
-                waitTime: !state.waitTime
-            }    
+                comments: action.payload
+            }       
         default:
             return state;
     }

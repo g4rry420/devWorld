@@ -60,6 +60,7 @@
     border: 0;
     background-color: #272b34;
     color: white !important;
+    border: 1px solid transparent;
 }
 .modal-form-container input:focus, .modal-form-container textarea:focus{
     box-shadow: none;

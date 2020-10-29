@@ -80,5 +80,24 @@ export const posts = async (userAuth, postsData) => {
     }
 }
 
+export const commentsFirestore = async (commentsData) => {
+    if(!commentsData) return;
+
+    const commentsRef = firestore.collection("posts").doc(commentsData.postId).collection("comments").doc();
+    const commentsRefSnapshot = commentsRef.get();
+
+    if(!(await commentsRefSnapshot).exists){
+        const createdAt = new Date();
+        try {
+            commentsRef.set({
+                createdAt,
+                ...commentsData
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

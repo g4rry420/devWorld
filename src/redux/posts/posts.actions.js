@@ -9,7 +9,7 @@ export const updatePosts = posts => ({
 
 export const updatePostAsync = () => {
     return dispatch => {
-        const unsubscribe = firestore.collection("posts").orderBy("createdAt", "desc").onSnapshot(async querySnapshot => {
+        const unsubscribe = firestore.collection("posts").orderBy("createdAt", "desc").onSnapshot( querySnapshot => {
             let docArray = [];
             let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
             querySnapshot.forEach(doc => {
@@ -108,6 +108,27 @@ export const updateHeartBooleanOnRedux = (postId) => ({
     payload: postId
 })
 
-export const dispatchWaitTime = () => ({
-    type: "DISPATCH_WAIT_TIME"
+export const updateComments = (comments) => ({
+    type: "UPDATE_COMMENTS",
+    payload: comments
 })
+
+export const updateCommentsAsync = postId => {
+    return dispatch => {
+
+        const unsubscribe  = firestore.collection("posts").doc(postId).collection("comments").onSnapshot(querySnapshot => {
+            let docArray = [];
+            let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+            querySnapshot.forEach(doc => {
+                const { createdAt, comment, postId, displayName } = doc.data();
+                docArray.push({ id: doc.id, 
+                    time: createdAt.toDate().getHours() + ":" + createdAt.toDate().getMinutes(),
+                    date: createdAt.toDate().getDate() + " " + months[createdAt.toDate().getMonth()] + " " + createdAt.toDate().getFullYear(),
+                    comment,postId, displayName: displayName.split(" ").map(word => word[0].toUpperCase() + word.substr(1)).join(" ")
+                })
+            })
+            dispatch(updateComments(docArray));
+        })
+        return () => unsubscribe();
+    }
+}
