@@ -6,7 +6,7 @@ import FormInput from "../form-input/form-input.component"
 import Heading from "../Heading/heading.component"
 import { auth } from "../../firebase/firebase.config"
 
-export default function LogIn({ state }) {
+export default function LogIn() {
 
     const [login, setLogin] = useState({
         email: "",

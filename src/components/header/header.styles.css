@@ -10,19 +10,25 @@
     font-weight: 600;
     font-size: 3.2rem;
 }
-.nav-list-container{
+.nav-list-container, .user-list-container{
     list-style-type: none;
-    font-size: 2rem;
 }
-.nav-list-container li a{
+.nav-list-container li a, .user-list-container li a{
     text-decoration: none;
     color: white;
 }
-.nav-list-container li a:hover{
+.user-list-container li a{
+    text-transform: capitalize;
+}
+.nav-list-container li a:hover, .user-list-container li a:hover{
     color: var(--primaryColor);
     background-color:rgba(234, 119, 115, 0.2);
     border-radius: 50px;
 }
-.nav-list-container li{
+.nav-list-container li, .user-list-container li{
     font-size: 2rem;
+}
+.user-list-container{
+    position: absolute;
+    bottom: 0;
 }

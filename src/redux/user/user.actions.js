@@ -17,7 +17,6 @@ export const setCurrentUserAsync = () => {
                     }))
                 })
             }
-            // setCurrentUser(userAuth);
         })
 
         return () => {

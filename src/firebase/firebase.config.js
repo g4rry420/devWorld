@@ -41,5 +41,44 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 }
 
+export const posts = async (userAuth, postsData) => {
+    if(!userAuth) return;
+
+    const postsRef = firestore.collection("posts").doc();
+    const snapshot = await postsRef.get();
+
+    if(!snapshot.exists){
+        const createdAt = new Date();
+        const heart = 0;
+        try {
+            await postsRef.set({
+                userId: userAuth.uid,
+                createdAt,
+                heart,
+                displayName: userAuth.displayName,
+                ...postsData
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    const heartBooleanRef = postsRef.collection("heartBoolean").doc(userAuth.uid);
+    const heartBooleanRefSnapshot = await heartBooleanRef.get();
+
+    if(!heartBooleanRefSnapshot.exists){
+        const createdAt = new Date();
+        const heartBoolean = false;
+        try {
+            await heartBooleanRef.set({
+                createdAt,
+                heartBoolean
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

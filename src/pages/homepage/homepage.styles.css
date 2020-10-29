@@ -1,6 +1,62 @@
 .center-homepage{
     background-color: #1a1d26;
 }
-.right-homepage{
-    max-width: 20%;
+.post-container{
+    background-color: #272b34;
+    border-radius: 25px;
+}
+.post-img-container img{
+    max-height: 55px;
+    border-radius: 50%;
+}
+.post-container .top-post-head{
+    display: flex;
+    justify-content: space-between;
+}
+.post-container .top-post-head .top-left-head{
+    display: flex;
+    align-items: flex-start;
+}
+.post-container .top-post-head .top-left-head .user-name{
+    font-size: 1.2rem;
+}
+.post-container .top-post-head .top-right-head .date, .post-container .top-post-head .top-right-head .time{
+    font-size: 0.9rem;
+    margin: 0;
+}
+.post-container .bottom-post .post-content{
+    font-size: 1rem;
+}
+.post-container .bottom-post .post-content p{
+    margin: 0;
+}
+.post-container .bottom-post .link-container{
+    font-size: 1rem;
+}
+.post-container .bottom-post .link-container p{
+    margin: 0;
+}
+.post-container .heart-container{
+    display: flex;
+    align-items: center;
+}
+.post-container .heart-container .heart{
+    color: #484f59;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+.post-container .heart-container .heart:hover{
+    color: rgb(207, 6, 6);
+}
+.post-container .heart-container .heart-number{
+    font-size: 1.1rem;
+}
+.heart-icon-active{
+    color: rgb(207, 6, 6) !important;
+}
+.comment-container a{
+    color: white;
+}
+.comment-container h5{
+    font-size: 1.1rem;
 }
