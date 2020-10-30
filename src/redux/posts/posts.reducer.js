@@ -3,7 +3,8 @@ import { updateHeartBoolean } from "./posts.utils"
 const INITIAL_STATE = {
     heartBoolean: [],
     posts: null,
-    comments: []
+    comments: [], 
+    currentUserPosts: []
 }
 
 const postsReducer = (state = INITIAL_STATE, action) => {
@@ -35,7 +36,12 @@ const postsReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 comments: action.payload
-            }       
+            }
+        case "CURRENT_USER_POSTS":
+            return{
+                ...state,
+                currentUserPosts: action.payload
+            }           
         default:
             return state;
     }

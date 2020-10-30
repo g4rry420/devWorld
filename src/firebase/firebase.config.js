@@ -24,8 +24,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if(!snapShot.exists) {
       const { displayName, email } = userAuth;
       const createdAt = new Date();
-      delete additionalData["confirmPassword"];
-      delete additionalData["password"];
+    //   delete additionalData["confirmPassword"];
+    //   delete additionalData["password"];
       try {
           await userRef.set({
               displayName,

@@ -1,0 +1,46 @@
+.user-profile-contain{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+}
+.user-profile-contain h3{
+    font-size: 2.5rem;
+}
+.user-profile-contain h4{
+    font-size: 1.7rem;
+}
+.user-profile-contain h3, .user-profile-contain .role{
+    text-transform: capitalize;
+}
+.user-profile-img-container img{
+    max-height: 100px;
+    border-radius: 50%;
+}
+.about-you p {
+    font-size: 1rem;
+}
+.icons{
+    list-style-type: none;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.icons li a{
+    font-size: 2rem;
+    color: white;
+}
+.portfolio-link{
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+.portfolio-link:hover{
+    color: white;
+}
+.user-posts h2{
+    font-size: 2.5rem;
+    color: var(--primaryColor);
+}
+.profile-link h5 a{
+    color: white;
+}

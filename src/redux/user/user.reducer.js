@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
     currentUser: null,
+    profiles: []
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: action.payload
             }
+        case "USER_PROFILES":
+            return {
+                ...state,
+                profiles: action.payload
+            }    
         default:
             return state;
     }

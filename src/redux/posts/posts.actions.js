@@ -51,9 +51,7 @@ export const updateHeartAsync = (postId, heartBoolean, userAuthId) => {
 
             await heartBooleanRef.update({
                     heartBoolean: true
-                    })
-                    // .then(() => dispatch(updateHeartBooleanAsync(postId, userAuthId)))
-                    // .catch((error) => console.log(error))     
+                    })   
 
         }else if(snapshot.exists && heartBoolean === true){
             await postsRef.update({
@@ -67,8 +65,6 @@ export const updateHeartAsync = (postId, heartBoolean, userAuthId) => {
             await heartBooleanRef.update({
                     heartBoolean: false
                 })
-                // .then(() => dispatch(updateHeartBooleanAsync(postId, userAuthId)))
-                //     .catch((error) => console.log(error))     
         }
     }
 }
@@ -129,6 +125,33 @@ export const updateCommentsAsync = postId => {
             })
             dispatch(updateComments(docArray));
         })
+        return () => unsubscribe();
+    }
+}
+
+export const currentUserPosts = post => ({
+    type: "CURRENT_USER_POSTS",
+    payload: post
+})
+
+export const currentUserPostsAsync = currentUserId => {
+    return dispatch => {
+        
+        const unsubscribe = firestore.collection("posts").where("userId", "==", currentUserId ).onSnapshot( querySnapshot => {
+            let docArray = [];
+            let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+            querySnapshot.forEach(doc => {
+                const { createdAt, title, link, heart, content, userId, displayName } = doc.data();
+                docArray.push({
+                    id: doc.id, 
+                    time: createdAt.toDate().getHours() + ":" + createdAt.toDate().getMinutes(),
+                    date: createdAt.toDate().getDate() + " " + months[createdAt.toDate().getMonth()] + " " + createdAt.toDate().getFullYear(),
+                    title, link, heart, content, userId, displayName: displayName.split(" ").map(word => word[0].toUpperCase() + word.substr(1)).join(" ")
+                })
+            })
+            dispatch(currentUserPosts(docArray))
+        })
+
         return () => unsubscribe();
     }
 }

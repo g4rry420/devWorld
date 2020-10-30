@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import "./modal.styles.css"
 import { posts } from "../../firebase/firebase.config"
@@ -39,6 +40,8 @@ function Modal({ modalRef, currentUser }) {
         })
 
         modalRef.current.classList.remove("modal-active-state");
+
+        return <Redirect to ="/" />
     }
 
     

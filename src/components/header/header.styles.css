@@ -17,6 +17,12 @@
     text-decoration: none;
     color: white;
 }
+.nav-list-container .create-post:hover{
+    cursor: pointer;
+    color: var(--primaryColor);
+    background-color:rgba(234, 119, 115, 0.2);
+    border-radius: 50px;
+}
 .user-list-container li a{
     text-transform: capitalize;
 }
@@ -31,4 +37,7 @@
 .user-list-container{
     position: absolute;
     bottom: 0;
+}
+.active-header{
+    color: var(--primaryColor) !important;
 }

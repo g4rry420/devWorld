@@ -1,3 +1,8 @@
 .profiles-container{
     background-color: #1a1d26;
 }
+.profiles-container .user-profile-main-contain {
+    background-color: #272b34;
+    padding: 1rem;
+    border-radius: 25px;
+}

@@ -34,9 +34,16 @@ export default function SignUp() {
             return;
         }
 
+        const dataToSend = {
+            displayName,
+            email,
+            role, techStack, portfolio,
+            linkedIn, twitter, github, instagram, aboutYou
+        }
+
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, {...signupForm});
+            await createUserProfileDocument(user, ...dataToSend);
             setSignUpForm({
                 displayName: "",
                 email: "",
