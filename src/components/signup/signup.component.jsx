@@ -43,7 +43,7 @@ export default function SignUp() {
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, ...dataToSend);
+            await createUserProfileDocument(user, dataToSend);
             setSignUpForm({
                 displayName: "",
                 email: "",

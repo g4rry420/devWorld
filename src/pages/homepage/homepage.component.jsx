@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import "./homepage.styles.css"
 import Post from "../../components/post/post.component"
 import { updatePostAsync, updateHeartBooleanAsync } from "../../redux/posts/posts.actions"
+import { selectCurrentUser } from "../../redux/user/user.selectors"
 
 function Homepage({ posts, updatePostAsync, currentUser, updateHeartBooleanAsync }) {
   
@@ -31,8 +32,8 @@ function Homepage({ posts, updatePostAsync, currentUser, updateHeartBooleanAsync
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.user.currentUser,
-    posts: state.posts.posts,
+    currentUser: selectCurrentUser(state),
+    posts: state.posts.posts
 })
 
 const mapDispatchToProps = (dispatch) => ({

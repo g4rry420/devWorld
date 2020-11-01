@@ -1,6 +1,7 @@
 import { firestore } from "../../firebase/firebase.config"
 import firebase from "firebase/app"
 import "firebase/firestore"
+import { notification } from "../notifications/notifications.actions"
 
 export const updatePosts = posts => ({
     type: "UPDATE_POSTS",
@@ -17,10 +18,11 @@ export const updatePostAsync = () => {
                 docArray.push({ id: doc.id, 
                     time: createdAt.toDate().getHours() + ":" + createdAt.toDate().getMinutes(),
                     date: createdAt.toDate().getDate() + " " + months[createdAt.toDate().getMonth()] + " " + createdAt.toDate().getFullYear(),
-                    title, link, heart, content, userId, displayName: displayName.split(" ").map(word => word[0].toUpperCase() + word.substr(1)).join(" ")
+                    title, createdAt, link, heart, content, userId, displayName: displayName.split(" ").map(word => word[0].toUpperCase() + word.substr(1)).join(" ")
                 })
             })
             dispatch(updatePosts(docArray))
+            dispatch(notification(docArray))
         })
 
         return () => unsubscribe();

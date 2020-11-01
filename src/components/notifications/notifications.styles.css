@@ -1,3 +1,37 @@
 .right-homepage{
     max-width: 20%;
+    padding-right: 0;
+}
+.noti-container{
+    background-color: #272b34;
+    border-radius: 10px;
+}
+.noti-container .top-noti-head{
+    display: flex;
+    justify-content: space-between;
+}
+.noti-container .top-noti-head .top-noti-right-head{
+    display: flex;
+    flex-direction: column;
+}
+.noti-container .top-noti-head .top-noti-right-head p{
+    margin: 0;
+    font-size: 0.8rem;
+}
+.noti-container .noti-left-head{
+    display: flex;
+    align-items: flex-start;
+}
+.noti-container .noti-img-container img {
+    max-height: 30px;
+    border-radius: 50%;
+}
+.noti-container .noti-name{
+    font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .right-homepage{
+        transform: translateX(600px);
+    }
 }

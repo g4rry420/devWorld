@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import "./modal.styles.css"
 import { posts } from "../../firebase/firebase.config"
+import { selectCurrentUser } from "../../redux/user/user.selectors"
 
 function Modal({ modalRef, currentUser }) {
 
@@ -78,7 +79,7 @@ function Modal({ modalRef, currentUser }) {
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+    currentUser: selectCurrentUser(state)
 })
 
 export default connect(mapStateToProps)(Modal)

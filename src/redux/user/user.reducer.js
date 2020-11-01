@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     currentUser: null,
-    profiles: []
+    profiles: [],
+    currentUserDependency: true,
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -20,7 +21,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 profiles: action.payload
-            }    
+            }
+        case "CURRENT_USER_DEPENDENCY":
+            return {
+                ...state,
+                currentUserDependency: !state.currentUserDependency
+            }            
         default:
             return state;
     }

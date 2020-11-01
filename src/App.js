@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect, useRef } from 'react';
 import { Route, Redirect, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 
@@ -11,17 +11,30 @@ import Notifications from "./components/notifications/notifications.component"
 import UserProfile from "./pages/user-profile/user-profile.component"
 import PostComment from './pages/post-comment/post-comment.component';
 import { setCurrentUserAsync } from "./redux/user/user.actions"
+import { selectCurrentUser } from "./redux/user/user.selectors"
 
 function App(props) {
+  const leftHomepageRef = useRef();
+
   useEffect(() => {
     const { setCurrentUserAsync } = props;
     setCurrentUserAsync();
-  }, [])
+  }, [props.currentUserDependency])
+
+  const handleSideToggle = () => {
+    leftHomepageRef.current.classList.toggle("active-left-homepage");
+  }
+
   return (
     <div className="App">
       <div className="container-fluid">
+          <div className="side-icon" onClick={handleSideToggle}>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-filter-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </div>
           <div className="row">
-            <Header/>
+            <Header leftHomepageRef={leftHomepageRef}/>
             <Switch>
               <Route exact path="/" render={() => props.currentUser ? <Homepage/> : <Redirect to="/login" />} />
               <Route path="/login" render={() => props.currentUser ? <Redirect to="/" /> : <Login/>} />
@@ -29,8 +42,10 @@ function App(props) {
               <Route exact path="/profiles" component={Profiles} />
               <Route path="/profiles/:profile_id" component={UserProfile} />
               <Route path="/post/:postId" component={PostComment} />
-            </Switch> 
-            <Notifications />
+            </Switch>
+            {
+              props.currentUser && <Notifications />
+            }
           </div>
       </div>
     </div>
@@ -38,7 +53,8 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser
+  currentUser: selectCurrentUser(state),
+  currentUserDependency: state.user.currentUserDependency
 })
 
 const mapDispatchToProps = dispatch => ({

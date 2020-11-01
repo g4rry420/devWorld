@@ -6,6 +6,7 @@ import Post from "../../components/post/post.component"
 import { currentUserPostsAsync } from "../../redux/posts/posts.actions"
 import { userProfilesAsync } from "../../redux/user/user.actions"
 import Profile from "../../components/profile/profile.component"
+import { selectProfiles } from "../../redux/user/user.selectors"
 
 function UserProfile({ currentUserPostsAsync, currentUserPosts, profiles, match, userProfilesAsync }) {
 
@@ -32,23 +33,27 @@ function UserProfile({ currentUserPostsAsync, currentUserPosts, profiles, match,
         {
             user &&  <Profile user={user} />
         }
-            <div className="user-posts mt-2">
-                <div className="text-center">
-                    <h2 className="display-4">Posts</h2>
-                </div>
+        {
+            currentUserPosts && (
+                <div className="user-posts mt-2">
+                    <div className="text-center">
+                        <h2 className="display-4">Posts</h2>
+                    </div>
             {
                 currentUserPosts && currentUserPosts.map(post => (
                     <Post key={post.id} post={post} commentValue={true} />
                 ))
             }
-            </div>
+                </div>
+            )
+        }  
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
     currentUserPosts: state.posts.currentUserPosts,
-    profiles: state.user.profiles
+    profiles: selectProfiles(state)
 });
 
 const mapDispatchToProps = dispatch => ({

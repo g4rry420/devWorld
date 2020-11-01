@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 
 import "./post.styles.css"
 import { updateHeartAsync,  updateHeartBooleanOnRedux, updateHeartBooleanAsync } from "../../redux/posts/posts.actions"
+import { selectCurrentUser } from "../../redux/user/user.selectors"
 
 function Post({ post, updateHeartAsync, updateHeartBooleanOnRedux, currentUser, heartBoolean, children, commentValue,updateHeartBooleanAsync }) {
     const [spanHeartId, setSpanHeartId] = useState("");
@@ -84,7 +85,7 @@ function Post({ post, updateHeartAsync, updateHeartBooleanOnRedux, currentUser, 
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.user.currentUser,
+    currentUser: selectCurrentUser(state),
     heartBoolean: state.posts.heartBoolean,
 })
 

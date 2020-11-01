@@ -74,7 +74,7 @@ export default function Profile({ user, seeProfile }) {
             <div>
             <div className="d-flex justify-content-between profile-link">
             {
-                user.portfolio ? <a className="portfolio-link" href={user.portfolio}>Click here to see my Portfolio</a> : <div></div>
+                user.portfolio ? <a className="portfolio-link" href={user.portfolio} target="_blank">Click here to see my Portfolio</a> : <div></div>
             }
             {    seeProfile && <h5><Link to={`/profiles/${user.uid}`}>See Profile</Link></h5>}
             </div>

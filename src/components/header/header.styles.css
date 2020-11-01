@@ -1,5 +1,4 @@
-.left-homepage{
-    height: 100vh;
+.left-homepage {
     max-width: 20%;
     position: sticky;
     top: 0;
@@ -25,6 +24,7 @@
 }
 .user-list-container li a{
     text-transform: capitalize;
+    white-space: nowrap;
 }
 .nav-list-container li a:hover, .user-list-container li a:hover{
     color: var(--primaryColor);
@@ -40,4 +40,33 @@
 }
 .active-header{
     color: var(--primaryColor) !important;
+}
+.side-icon{
+    cursor: pointer;
+    display: none;
+}
+.side-icon svg{
+    font-size: 2rem;
+}
+@media only screen and (min-width: 702px){
+    .left-homepage{
+        height: 100vh;
+    }
+}
+@media only screen and (max-width: 700px) {
+    .side-icon{
+        display: initial;
+    }
+    .left-homepage {
+        transform: translateX(-600px);
+        position: fixed;
+        top: 3%;
+        max-width: 60%;
+        background-color: var(--bgColor);
+        transition: var(--mainTransition);
+    }
+    .active-left-homepage{
+        transform: translateX(0px) !important;
+        transition: var(--mainTransition) !important;
+    }
 }

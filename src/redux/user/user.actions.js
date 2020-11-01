@@ -1,4 +1,5 @@
 import { auth, createUserProfileDocument, firestore } from "../../firebase/firebase.config"
+import { notification } from "../notifications/notifications.actions"
 
 export const setCurrentUser = user => ({
     type: "SET_CURRENT_USER",
@@ -41,12 +42,23 @@ export const userProfilesAsync = () => {
         const unsubscribe = firestore.collection("users").onSnapshot(querySnapshot => {
 
             let docArray = [];
+            let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
             querySnapshot.forEach(doc => {
-                docArray.push({ uid: doc.id, ...doc.data() })
+                const { aboutYou, createdAt, displayName, email, github, instagram, linkedIn, portfolio, role, techStack, twitter } = doc.data();
+                docArray.push({ uid: doc.id,
+                    time: createdAt.toDate().getHours() + ":" + createdAt.toDate().getMinutes(),
+                    date: createdAt.toDate().getDate() + " " + months[createdAt.toDate().getMonth()] + " " + createdAt.toDate().getFullYear(),
+                    aboutYou, displayName, email, github, instagram, linkedIn, portfolio, role, techStack, twitter, createdAt
+                })
             })
             dispatch(userProfiles(docArray))
+            dispatch(notification(docArray))
         })
 
         return () => unsubscribe();
     }
 }
+
+export const currentUserDependency = () => ({
+    type: "CURRENT_USER_DEPENDENCY"
+})

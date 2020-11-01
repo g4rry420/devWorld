@@ -2,32 +2,43 @@ import React,{ useEffect } from 'react'
 import { connect } from "react-redux"
 
 import "./profiles.styles.css"
-import { userProfilesAsync } from "../../redux/user/user.actions"
+import { userProfilesAsync, currentUserDependency } from "../../redux/user/user.actions"
 import Profile from "../../components/profile/profile.component"
+import { selectCurrentUser } from "../../redux/user/user.selectors"
 
-function Profiles({ profiles, userProfilesAsync }) {
+function Profiles({ profiles, userProfilesAsync, currentUser, currentUserDependency }) {
 
     useEffect(() => {
         userProfilesAsync()
     }, [])
 
+    useEffect(() => {
+        currentUserDependency();
+    }, [])
+
     return (
         <div className="col-md-7 profiles-container">
         {
-            profiles && profiles.map(profile => (
-                <Profile key={profile.uid} user={profile} seeProfile={true} />
-            ))
+            profiles && profiles.map(profile => {
+                if(profile.uid !== (currentUser && currentUser.uid)){
+                    return  (
+                        <Profile key={profile.uid} user={profile} seeProfile={true} />
+                    )
+                }
+            })
         }
         </div>
     )
 }
 
 const mapStateToProps = state => ({
+    currentUser: selectCurrentUser(state),
     profiles: state.user.profiles
 })
 
 const mapDispatchToProps = dispatch => ({
-    userProfilesAsync: () => dispatch(userProfilesAsync())
+    userProfilesAsync: () => dispatch(userProfilesAsync()),
+    currentUserDependency: () => dispatch(currentUserDependency())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profiles)

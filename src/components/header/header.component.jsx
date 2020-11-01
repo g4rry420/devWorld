@@ -6,11 +6,11 @@ import "./header.styles.css"
 import { auth } from '../../firebase/firebase.config'
 import { setCurrentUserLogout } from "../../redux/user/user.actions"
 import Modal from "../modal/modal.component"
+import { selectCurrentUser } from "../../redux/user/user.selectors"
 
 function Header(props) {
     const navListContainRef = useRef();
     const modalRef = useRef();
-
     // useEffect(() => {
     //     if(!navListContainRef) return;
 
@@ -27,7 +27,7 @@ function Header(props) {
     //     }
 
     // }, [props.location.pathname])
-
+    
 
     const handleModal = () => {
         modalRef.current.classList.add("modal-active-state");
@@ -35,7 +35,7 @@ function Header(props) {
 
     const { currentUser, setCurrentUserLogout } = props;
     return (
-        <nav className="left-homepage col-md-3">
+        <nav ref={props.leftHomepageRef} className="left-homepage col-md-3">
             <aside>
                 <div className="brand-name text-center">
                     <h1 className="display-4">DevWorld</h1>
@@ -62,7 +62,7 @@ function Header(props) {
                     }
                     </ul>
                     <ul className="user-list-container">
-                        <li className="display-4 my-3"><Link to={`/profiles/${currentUser && currentUser.uid}`} className="px-4 py-1">{currentUser && currentUser.displayName}</Link> </li>
+                        <li className="display-4 my-3"><Link to={`/profiles/${currentUser && currentUser.uid}`} className="px-4 py-1">{currentUser && currentUser.displayName.split(" ")[0]}</Link> </li>
                     </ul>
                 </div>
             </aside>
@@ -72,7 +72,7 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+    currentUser: selectCurrentUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

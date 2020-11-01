@@ -7,6 +7,7 @@ import Post from "../../components/post/post.component"
 import CustomButton from "../../components/custom-button/custom-button.component";
 import { commentsFirestore } from "../../firebase/firebase.config";
 import { updateCommentsAsync, updatePostAsync } from "../../redux/posts/posts.actions"
+import { selectCurrentUser } from "../../redux/user/user.selectors"
 
 function PostComment(props) {
     const [comment, setComment] = useState("");
@@ -85,7 +86,7 @@ function PostComment(props) {
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.user.currentUser,
+    currentUser: selectCurrentUser(state),
     comments: state.posts.comments,
     posts: state.posts.posts
 })
