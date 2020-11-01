@@ -1,18 +1,21 @@
-import React,{ useEffect, useRef } from 'react';
+import React,{ useEffect, useRef, lazy, Suspense } from 'react';
 import { Route, Redirect, Switch } from "react-router-dom"
 import { connect } from "react-redux"
 
 import "./App.css"
-import Homepage from "./pages/homepage/homepage.component"
 import Header from "./components/header/header.component"
-import Login from "./components/login/login.component"
-import SignUp from "./components/signup/signup.component"
-import Profiles from "./pages/profiles/profiles.component"
-import Notifications from "./components/notifications/notifications.component"
-import UserProfile from "./pages/user-profile/user-profile.component"
-import PostComment from './pages/post-comment/post-comment.component';
+import ErrorBoundary from "./components/error-boundary/error-boundary.component"
 import { setCurrentUserAsync } from "./redux/user/user.actions"
 import { selectCurrentUser } from "./redux/user/user.selectors"
+import Spinner from "./components/spinner/spinner.component"
+
+const Homepage = lazy(() => import("./pages/homepage/homepage.component"));
+const Login = lazy(() => import("./components/login/login.component"));
+const SignUp = lazy(() => import("./components/signup/signup.component"));
+const Profiles = lazy(() => import("./pages/profiles/profiles.component"));
+const Notifications = lazy(() => import("./components/notifications/notifications.component"));
+const UserProfile = lazy(() => import("./pages/user-profile/user-profile.component"));
+const PostComment = lazy(() => import("./pages/post-comment/post-comment.component"));
 
 function App(props) {
   const leftHomepageRef = useRef();
@@ -47,18 +50,23 @@ function App(props) {
             }
           </div>
           <div className="row">
-            <Header leftHomepageRef={leftHomepageRef} rightHomepageRef={rightHomepageRef} />
-            <Switch>
-              <Route exact path="/" render={() => props.currentUser ? <Homepage/> : <Redirect to="/login" />} />
-              <Route path="/login" render={() => props.currentUser ? <Redirect to="/" /> : <Login/>} />
-              <Route path="/signup" render={() => props.currentUser ? <Redirect to="/" /> : <SignUp/>} />
-              <Route exact path="/profiles" component={Profiles} />
-              <Route path="/profiles/:profile_id" component={UserProfile} />
-              <Route path="/post/:postId" component={PostComment} />
-            </Switch>
-            {
-              props.currentUser && <Notifications rightHomepageRef={rightHomepageRef} />
-            }
+            <ErrorBoundary>
+              <Header leftHomepageRef={leftHomepageRef} rightHomepageRef={rightHomepageRef} />
+              <Suspense fallback={<Spinner />}>
+                <Switch>
+                  <Route exact path="/" render={() => props.currentUser ? <Homepage/> : <Redirect to="/login" />} />
+                  <Route path="/login" render={() => props.currentUser ? <Redirect to="/" /> : <Login/>} />
+                  <Route path="/signup" render={() => props.currentUser ? <Redirect to="/" /> : <SignUp/>} />
+                  <Route exact path="/profiles" component={Profiles} />
+                  <Route path="/profiles/:profile_id" component={UserProfile} />
+                  <Route path="/post/:postId" component={PostComment} />
+                </Switch>
+              
+              {
+                props.currentUser && <Notifications rightHomepageRef={rightHomepageRef} />
+              }
+              </Suspense>
+            </ErrorBoundary>
           </div>
       </div>
     </div>

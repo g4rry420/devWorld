@@ -36,6 +36,7 @@ function Header(props) {
     }
 
     const handleLink = () => {
+        if(!props.rightHomepageRef.current) return;
         props.leftHomepageRef.current.classList.remove("active-left-homepage");
         props.rightHomepageRef.current.classList.remove("active-right-homepage");
     }
