@@ -1,5 +1,6 @@
 import React,{ useEffect, useState } from 'react'
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect"
 
 import "./user-profile.styles.css"
 import Post from "../../components/post/post.component"
@@ -7,6 +8,7 @@ import { currentUserPostsAsync } from "../../redux/posts/posts.actions"
 import { userProfilesAsync } from "../../redux/user/user.actions"
 import Profile from "../../components/profile/profile.component"
 import { selectProfiles } from "../../redux/user/user.selectors"
+import { selectCurrentUserPosts } from "../../redux/posts/posts.selectors"
 
 function UserProfile({ currentUserPostsAsync, currentUserPosts, profiles, match, userProfilesAsync }) {
 
@@ -51,9 +53,9 @@ function UserProfile({ currentUserPostsAsync, currentUserPosts, profiles, match,
     )
 }
 
-const mapStateToProps = (state) => ({
-    currentUserPosts: state.posts.currentUserPosts,
-    profiles: selectProfiles(state)
+const mapStateToProps = createStructuredSelector({
+    currentUserPosts: selectCurrentUserPosts,
+    profiles: selectProfiles
 });
 
 const mapDispatchToProps = dispatch => ({

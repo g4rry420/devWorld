@@ -1,10 +1,12 @@
 import React,{ useEffect } from 'react'
 import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
 
 import "./homepage.styles.css"
 import Post from "../../components/post/post.component"
 import { updatePostAsync, updateHeartBooleanAsync } from "../../redux/posts/posts.actions"
 import { selectCurrentUser } from "../../redux/user/user.selectors"
+import { selectPost } from "../../redux/posts/posts.selectors"
 
 function Homepage({ posts, updatePostAsync, currentUser, updateHeartBooleanAsync }) {
   
@@ -31,9 +33,9 @@ function Homepage({ posts, updatePostAsync, currentUser, updateHeartBooleanAsync
     )
 }
 
-const mapStateToProps = state => ({
-    currentUser: selectCurrentUser(state),
-    posts: state.posts.posts
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    posts: selectPost
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -7,14 +7,14 @@ import { userProfilesAsync } from "../../redux/user/user.actions"
 import { updatePostAsync } from "../../redux/posts/posts.actions"
 import { selectNotification } from "../../redux/notifications/notification.selectors"
 
-function Notifications({ notification, userProfilesAsync }) {
+function Notifications({ notification, userProfilesAsync, rightHomepageRef }) {
     useEffect(() => {
         userProfilesAsync();
         updatePostAsync()
     }, [])
 
     return (    
-        <aside className="right-homepage col-md-3">
+        <aside ref={rightHomepageRef} className="right-homepage col-md-3">
             <h2>Notifications</h2>
             {
                 notification && notification.sort((a, b) =>  b.createdAt.seconds - a.createdAt.seconds ).map(noti => (

@@ -44,3 +44,12 @@
 .profile-link h5 a{
     color: white;
 }
+
+@media only screen and (max-width: 700px){
+    .icons{
+        flex-direction: column;
+    }
+    .user-profile-img-container img{
+        max-height: 80px;
+    }
+}

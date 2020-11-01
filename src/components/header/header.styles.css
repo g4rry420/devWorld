@@ -41,13 +41,6 @@
 .active-header{
     color: var(--primaryColor) !important;
 }
-.side-icon{
-    cursor: pointer;
-    display: none;
-}
-.side-icon svg{
-    font-size: 2rem;
-}
 @media only screen and (min-width: 702px){
     .left-homepage{
         height: 100vh;
@@ -60,10 +53,11 @@
     .left-homepage {
         transform: translateX(-600px);
         position: fixed;
-        top: 3%;
+        top: 4%;
         max-width: 60%;
         background-color: var(--bgColor);
         transition: var(--mainTransition);
+        height: 100%;
     }
     .active-left-homepage{
         transform: translateX(0px) !important;

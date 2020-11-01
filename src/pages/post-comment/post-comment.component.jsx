@@ -1,6 +1,7 @@
 import React,{ useState, useEffect } from 'react'
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
+import { createStructuredSelector } from "reselect"
 
 import "./post-comment.styles.css"
 import Post from "../../components/post/post.component"
@@ -8,6 +9,8 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import { commentsFirestore } from "../../firebase/firebase.config";
 import { updateCommentsAsync, updatePostAsync } from "../../redux/posts/posts.actions"
 import { selectCurrentUser } from "../../redux/user/user.selectors"
+import { selectPost, selectComments } from "../../redux/posts/posts.selectors"
+
 
 function PostComment(props) {
     const [comment, setComment] = useState("");
@@ -85,10 +88,10 @@ function PostComment(props) {
     )
 }
 
-const mapStateToProps = state => ({
-    currentUser: selectCurrentUser(state),
-    comments: state.posts.comments,
-    posts: state.posts.posts
+const mapStateToProps = createStructuredSelector ({
+    currentUser: selectCurrentUser,
+    comments: selectComments,
+    posts: selectPost
 })
 
 const mapDispatchToProps = dispatch => ({

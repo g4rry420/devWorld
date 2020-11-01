@@ -1,10 +1,12 @@
 import React,{ useEffect, useRef, useState }  from 'react'
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
+import { createStructuredSelector } from "reselect"
 
 import "./post.styles.css"
 import { updateHeartAsync,  updateHeartBooleanOnRedux, updateHeartBooleanAsync } from "../../redux/posts/posts.actions"
 import { selectCurrentUser } from "../../redux/user/user.selectors"
+import { selectHeartBoolean } from "../../redux/posts/posts.selectors"
 
 function Post({ post, updateHeartAsync, updateHeartBooleanOnRedux, currentUser, heartBoolean, children, commentValue,updateHeartBooleanAsync }) {
     const [spanHeartId, setSpanHeartId] = useState("");
@@ -84,9 +86,9 @@ function Post({ post, updateHeartAsync, updateHeartBooleanOnRedux, currentUser, 
         )
 }
 
-const mapStateToProps = state => ({
-    currentUser: selectCurrentUser(state),
-    heartBoolean: state.posts.heartBoolean,
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    heartBoolean: selectHeartBoolean,
 })
 
 const mapDispatchToProps = (dispatch) => ({

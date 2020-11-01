@@ -1,10 +1,11 @@
 import React,{ useEffect } from 'react'
 import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
 
 import "./profiles.styles.css"
 import { userProfilesAsync, currentUserDependency } from "../../redux/user/user.actions"
 import Profile from "../../components/profile/profile.component"
-import { selectCurrentUser } from "../../redux/user/user.selectors"
+import { selectCurrentUser, selectProfiles } from "../../redux/user/user.selectors"
 
 function Profiles({ profiles, userProfilesAsync, currentUser, currentUserDependency }) {
 
@@ -31,9 +32,9 @@ function Profiles({ profiles, userProfilesAsync, currentUser, currentUserDepende
     )
 }
 
-const mapStateToProps = state => ({
-    currentUser: selectCurrentUser(state),
-    profiles: state.user.profiles
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    profiles: selectProfiles
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -33,6 +33,11 @@ function Header(props) {
         modalRef.current.classList.add("modal-active-state");
     }
 
+    const handleLink = () => {
+        props.leftHomepageRef.current.classList.remove("active-left-homepage");
+        props.rightHomepageRef.current.classList.remove("active-right-homepage");
+    }
+
     const { currentUser, setCurrentUserLogout } = props;
     return (
         <nav ref={props.leftHomepageRef} className="left-homepage col-md-3">
@@ -45,24 +50,24 @@ function Header(props) {
                     {
                         currentUser ? (
                             <>
-                            <li className="my-3 display-4"><Link to="/" className="px-4 py-1">Home</Link></li>
-                            <li className="my-3 display-4"><Link  to="/profiles" className="px-4 py-1">Profiles</Link></li>
-                            <li className="my-3 display-4 px-4 py-1 create-post" onClick={handleModal} >Create Post</li>
-                            <li className="my-3 display-4"><Link to="/login" className="px-4 py-1" onClick={() => {
+                            <li className="my-3 display-4"><Link onClick={handleLink} to="/" className="px-4 py-1">Home</Link></li>
+                            <li className="my-3 display-4"><Link onClick={handleLink} to="/profiles" className="px-4 py-1">Profiles</Link></li>
+                            <li className="my-3 display-4 px-4 py-1 create-post" onClick={handleLink} onClick={handleModal} >Create Post</li>
+                            <li className="my-3 display-4"><Link onClick={handleLink} to="/login" className="px-4 py-1" onClick={() => {
                                 auth.signOut();
                                 setCurrentUserLogout(null);
                             }}>LogOut</Link></li>
                             </>
                         ) : (
                             <>
-                            <li className="my-3 display-4"><Link to="/login" className="px-4 py-1">LogIn</Link></li>
-                            <li className="my-3 display-4"><Link to="/signup" className="px-4 py-1">SignUp</Link></li>
+                            <li className="my-3 display-4"><Link onClick={handleLink} to="/login" className="px-4 py-1">LogIn</Link></li>
+                            <li className="my-3 display-4"><Link onClick={handleLink} to="/signup" className="px-4 py-1">SignUp</Link></li>
                             </>
                         )
                     }
                     </ul>
                     <ul className="user-list-container">
-                        <li className="display-4 my-3"><Link to={`/profiles/${currentUser && currentUser.uid}`} className="px-4 py-1">{currentUser && currentUser.displayName.split(" ")[0]}</Link> </li>
+                        <li className="display-4 my-3"><Link onClick={handleLink} to={`/profiles/${currentUser && currentUser.uid}`} className="px-4 py-1">{currentUser && currentUser.displayName.split(" ")[0]}</Link> </li>
                     </ul>
                 </div>
             </aside>
