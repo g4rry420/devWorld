@@ -4,11 +4,10 @@ import ReduxThunk from "redux-thunk";
 
 import rootReducer from "./root-reducer";
 
-const middelewares = [];
+const middelewares = [ReduxThunk];
 
 if(process.env.NODE_ENV === "development"){
     middelewares.push(logger);
-    middelewares.push(ReduxThunk);
 }
 
 const store = createStore(rootReducer, applyMiddleware(...middelewares))
