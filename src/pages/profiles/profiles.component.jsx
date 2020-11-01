@@ -11,7 +11,7 @@ function Profiles({ profiles, userProfilesAsync, currentUser, currentUserDepende
 
     useEffect(() => {
         userProfilesAsync()
-    }, [])
+    }, [userProfilesAsync])
 
     useEffect(() => {
         currentUserDependency();

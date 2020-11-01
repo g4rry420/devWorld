@@ -7,7 +7,7 @@ import rootReducer from "./root-reducer";
 const middelewares = [];
 
 if(process.env.NODE_ENV === "development"){
-    // middelewares.push(logger);
+    middelewares.push(logger);
     middelewares.push(ReduxThunk);
 }
 

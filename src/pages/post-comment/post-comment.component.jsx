@@ -16,19 +16,20 @@ function PostComment(props) {
     const [comment, setComment] = useState("");
     const [post, setPost] = useState(null)
 
+    const { match:{ params: {postId}}, posts, updatePostAsync, updateCommentsAsync } = props
+
     useEffect(() => {
-        const { posts, updatePostAsync } = props;
         if(!posts){
             updatePostAsync();
         }else {
-            let post = posts.filter(post => post.id === props.match.params.postId);
+            let post = posts.filter(post => post.id === postId);
             setPost(post[0])
         }
-    }, [props.posts])
+    }, [posts])
 
     useEffect(() => {
         if(!post) return;
-        props.updateCommentsAsync(post.id)
+        updateCommentsAsync(post.id)
     }, [post])
 
     const handleChange = event => {

@@ -11,7 +11,7 @@ function Notifications({ notification, userProfilesAsync, rightHomepageRef }) {
     useEffect(() => {
         userProfilesAsync();
         updatePostAsync()
-    }, [])
+    }, [userProfilesAsync])
 
     return (    
         <aside ref={rightHomepageRef} className="right-homepage col-md-3">

@@ -12,7 +12,7 @@ function Homepage({ posts, updatePostAsync, currentUser, updateHeartBooleanAsync
   
     useEffect(() => {
         updatePostAsync();
-    }, [])
+    }, [updatePostAsync])
 
     useEffect(() => {
         if(!currentUser) return;

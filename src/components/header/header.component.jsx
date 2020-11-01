@@ -1,4 +1,4 @@
-import React,{ useEffect, useRef } from 'react'
+import React,{ useRef } from 'react'
 import { Link, withRouter } from "react-router-dom"
 import { connect } from "react-redux"
 
@@ -31,6 +31,8 @@ function Header(props) {
 
     const handleModal = () => {
         modalRef.current.classList.add("modal-active-state");
+        props.leftHomepageRef.current.classList.remove("active-left-homepage");
+        props.rightHomepageRef.current.classList.remove("active-right-homepage");
     }
 
     const handleLink = () => {
@@ -52,10 +54,11 @@ function Header(props) {
                             <>
                             <li className="my-3 display-4"><Link onClick={handleLink} to="/" className="px-4 py-1">Home</Link></li>
                             <li className="my-3 display-4"><Link onClick={handleLink} to="/profiles" className="px-4 py-1">Profiles</Link></li>
-                            <li className="my-3 display-4 px-4 py-1 create-post" onClick={handleLink} onClick={handleModal} >Create Post</li>
-                            <li className="my-3 display-4"><Link onClick={handleLink} to="/login" className="px-4 py-1" onClick={() => {
+                            <li className="my-3 display-4 px-4 py-1 create-post" onClick={handleModal} >Create Post</li>
+                            <li className="my-3 display-4"><Link to="/login" className="px-4 py-1" onClick={() => {
                                 auth.signOut();
                                 setCurrentUserLogout(null);
+                                handleLink()
                             }}>LogOut</Link></li>
                             </>
                         ) : (

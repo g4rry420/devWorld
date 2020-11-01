@@ -18,9 +18,9 @@ function Post({ post, updateHeartAsync, updateHeartBooleanOnRedux, currentUser, 
     }
 
     useEffect(() => {
-        heartBoolean.map(heart => {
+        return heartBoolean.map(heart => {
             if(heart.heartBoolean){
-                setSpanHeartId(heart.postId)
+               return setSpanHeartId(heart.postId)
             }
         })
     }, [heartBoolean])
@@ -58,7 +58,7 @@ function Post({ post, updateHeartAsync, updateHeartBooleanOnRedux, currentUser, 
                     </div>
                     <div className="link-container mt-2">
                     {
-                        post.link && <p>Link : <a href={ post.link } target="_blank"> {post.link} </a></p>
+                        post.link && <p>Link : <a href={ post.link } target="_blank" rel="noopener noreferrer"> {post.link} </a></p>
                     }
                     </div>
                     <div className="heart-container mt-2">
