@@ -36,7 +36,7 @@ function UserProfile({ currentUserPostsAsync, currentUserPosts, profiles, match,
             user &&  <Profile user={user} />
         }
         {
-            currentUserPosts && (
+            currentUserPosts.length ? (
                 <div className="user-posts mt-2">
                     <div className="text-center">
                         <h2 className="display-4">Posts</h2>
@@ -47,7 +47,7 @@ function UserProfile({ currentUserPostsAsync, currentUserPosts, profiles, match,
                 ))
             }
                 </div>
-            )
+            ) : null
         }  
         </div>
     )
