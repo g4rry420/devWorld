@@ -16,6 +16,7 @@ const Profiles = lazy(() => import("./pages/profiles/profiles.component"));
 const Notifications = lazy(() => import("./components/notifications/notifications.component"));
 const UserProfile = lazy(() => import("./pages/user-profile/user-profile.component"));
 const PostComment = lazy(() => import("./pages/post-comment/post-comment.component"));
+const Welcome = lazy(() => import("./components/welcome/welcome.component"))
 
 function App(props) {
   const leftHomepageRef = useRef();
@@ -54,9 +55,10 @@ function App(props) {
               <Header leftHomepageRef={leftHomepageRef} rightHomepageRef={rightHomepageRef} />
               <Suspense fallback={<Spinner />}>
                 <Switch>
-                  <Route exact path="/" render={() => props.currentUser ? <Homepage/> : <Redirect to="/login" />} />
-                  <Route path="/login" render={() => props.currentUser ? <Redirect to="/" /> : <Login/>} />
-                  <Route path="/signup" render={() => props.currentUser ? <Redirect to="/" /> : <SignUp/>} />
+                  <Route exact path="/" component={Welcome} />
+                  <Route exact path="/post" render={() => props.currentUser ? <Homepage/> : <Redirect to="/" />} />
+                  <Route path="/login" render={() => props.currentUser ? <Redirect to="/post" /> : <Login/>} />
+                  <Route path="/signup" render={() => props.currentUser ? <Redirect to="/post" /> : <SignUp/>} />
                   <Route exact path="/profiles" component={Profiles} />
                   <Route path="/profiles/:profile_id" component={UserProfile} />
                   <Route path="/post/:postId" component={PostComment} />
