@@ -1,4 +1,4 @@
-import React,{ useRef } from 'react'
+import React,{ useRef, useEffect } from 'react'
 import { Link, withRouter } from "react-router-dom"
 import { connect } from "react-redux"
 
@@ -11,22 +11,22 @@ import { selectCurrentUser } from "../../redux/user/user.selectors"
 function Header(props) {
     const navListContainRef = useRef();
     const modalRef = useRef();
-    // useEffect(() => {
-    //     if(!navListContainRef) return;
+    useEffect(() => {
+        if(!navListContainRef) return;
 
-    //     for (let index = 0; index < navListContainRef.current.childNodes.length; index++) {
-    //         const element = navListContainRef.current.childNodes[index];
-    //         if(!element.children[0]) return;
-    //         if(element.children[0].pathname === props.location.pathname){
-    //             if(!element.children[0]) return;
-    //             element.children[0].classList.add("active-header");
-    //         }else{
-    //             if(!element.children[0]) return;
-    //             element.children[0].classList.remove("active-header");
-    //         }
-    //     }
+        for (let index = 0; index < navListContainRef.current.childNodes.length; index++) {
+            const element = navListContainRef.current.childNodes[index];
+            if(!element.children[0]) return;
+            if(element.children[0].pathname === props.location.pathname){
+                if(!element.children[0]) return;
+                element.children[0].classList.add("active-header");
+            }else{
+                if(!element.children[0]) return;
+                element.children[0].classList.remove("active-header");
+            }
+        }
 
-    // }, [props.location.pathname])
+    }, [props.location.pathname])
     
 
     const handleModal = () => {
@@ -53,7 +53,7 @@ function Header(props) {
                     {
                         currentUser ? (
                             <>
-                            <li className="my-3 display-4"><Link onClick={handleLink} to="/" className="px-4 py-1">Home</Link></li>
+                            <li className="my-3 display-4"><Link onClick={handleLink} to="/post" className="px-4 py-1">Home</Link></li>
                             <li className="my-3 display-4"><Link onClick={handleLink} to="/profiles" className="px-4 py-1">Profiles</Link></li>
                             <li className="my-3 display-4 px-4 py-1 create-post" onClick={handleModal} >Create Post</li>
                             <li className="my-3 display-4"><Link to="/login" className="px-4 py-1" onClick={() => {
