@@ -42,7 +42,7 @@ function Modal({ modalRef, currentUser }) {
 
         modalRef.current.classList.remove("modal-active-state");
 
-        return <Redirect to ="/" />
+        return <Redirect to ="/post" />
     }
 
     

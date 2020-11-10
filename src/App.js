@@ -55,8 +55,8 @@ function App(props) {
               <Header leftHomepageRef={leftHomepageRef} rightHomepageRef={rightHomepageRef} />
               <Suspense fallback={<Spinner />}>
                 <Switch>
-                  <Route exact path="/" component={Welcome} />
-                  <Route exact path="/post" render={() => props.currentUser ? <Homepage/> : <Redirect to="/" />} />
+                  <Route exact path="/" render={() => props.currentUser ? <Homepage/> : <Welcome/>} />
+                  <Route path="/post" render={() => props.currentUser ? <Homepage/> : <Redirect to="/post" />} />
                   <Route path="/login" render={() => props.currentUser ? <Redirect to="/post" /> : <Login/>} />
                   <Route path="/signup" render={() => props.currentUser ? <Redirect to="/post" /> : <SignUp/>} />
                   <Route exact path="/profiles" component={Profiles} />
