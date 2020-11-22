@@ -50,6 +50,11 @@ export default function LogIn() {
                     <CustomButton title="LogIn" button="login-button" />
                 </div>
                 <p>{loginError}</p>
+                <div className="test-container text-center">
+                    <h4 className="display-4">Test Credentials</h4>
+                    <h5 className="display-4">Email: test@user.com</h5>
+                    <h5 className="display-4">Password: 1234567</h5>
+                </div>
             </form>
         </div>
     )
