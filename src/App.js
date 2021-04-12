@@ -62,6 +62,7 @@ function App(props) {
                   <Route exact path="/profiles" component={Profiles} />
                   <Route path="/profiles/:profile_id" component={UserProfile} />
                   <Route path="/post/:postId" component={PostComment} />
+                  <Route component={<Homepage/>} />
                 </Switch>
               
               {
