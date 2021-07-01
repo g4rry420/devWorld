@@ -38,4 +38,4 @@ DevWorld is a social media platform where users can create new post and like eac
 
 ## Usage
 
--   `npm start` - To start with frontend of the project.
+-   `npm start` - To start the project.
